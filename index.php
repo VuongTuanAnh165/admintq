@@ -23,7 +23,7 @@
 
   <!-- Main content -->
   <div style="width:960px; margin: auto; overflow: hidden">
-        <h3 style="color: #002247; text-align: center">WEBSITE MULTIPLE MANAGEMENT</h3>
+        <h3 style="color: #002247; text-align: center">Tuấn anh óc chó</h3>
         <p style="text-align: center; position: relative">
             <img src="/image/banner.png" alt="welcome image">
         </p>
