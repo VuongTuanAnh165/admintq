@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sản phẩm <a href="./add.php" class="btn btn-success">Thêm mới</a></h1>
+                    <h1>Dịch vụ <a href="./add.php" class="btn btn-success">Thêm mới</a></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="../../index.php">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+                        <li class="breadcrumb-item active">Danh sách dịch vụ</li>
                     </ol>
                 </div>
             </div>
