@@ -1,7 +1,7 @@
 <?php
     require_once ( __DIR__ . '/../../autoload/autoload.php');
-    $sql="SELECT *  FROM product,website_config,product_group WhERE product.web_id=website_config.web_id AND product.product_gr_id=product_group.product_gr_id";
-    $product = $db->fetchdata($sql);
+    $sql="SELECT *  FROM service,service_group WhERE service.service_gr_id=service_group.service_gr_id";
+    $service = $db->fetchdata($sql);
 ?>
 
 <?php
@@ -44,34 +44,28 @@
                                 <thead> 
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên sản phẩm</th>
+                                        <th>Tên dịch vụ</th>
                                         <th>Mô tả</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Giá cả</th>
-                                        <th>Website</th>
-                                        <th>Nhóm sản phẩm</th>
+                                        <th>Nhóm dịch vụ</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $stt = 1; foreach ($product as $item) : ?>
+                                    <?php $stt = 1; foreach ($service as $item) : ?>
                                         <tr>
                                             <td><?php echo $stt ?></td>
-                                            <td><?php echo $item['product_name'] ?></td>
-                                            <td><?php echo $item['product_description'] ?></td>
-                                            <td><?php echo "<img width=100px src='photo/" . $item['product_image_path'] . "'>" ?></td>
-                                            <td><?php echo currency_format($item['product_price']) ?></td>
-                                            <td><?php echo $item['web_name'] ?></td>
-                                            <td><?php echo $item['product_gr_name'] ?></td>
+                                            <td><?php echo $item['service_name'] ?></td>
+                                            <td><?php echo $item['service_description'] ?></td>
+                                            <td><?php echo $item['service_gr_name'] ?></td>
                                             <td>
-                                                <a href="active.php?id=<?php echo $item['product_id'] ?>" class="btn btn-xs <?php echo $item['product_active'] == 1 ? 'btn-info' : 'btn-dark' ?> ">
-                                                    <?php echo $item['product_active'] == 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt' ?>
+                                                <a href="active.php?id=<?php echo $item['service_id'] ?>" class="btn btn-xs <?php echo $item['service_active'] == 1 ? 'btn-info' : 'btn-dark' ?> ">
+                                                    <?php echo $item['service_active'] == 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt' ?>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-xs btn-info" href='edit.php?id=<?php echo $item["product_id"] ?>'><i class="fa fa-edit"></i>Sửa</a>
-                                                <a class="btn btn-xs btn-danger" href='delete.php?id=<?php echo $item["product_id"] ?>'><i class="fa fa-times"></i>Xóa</a>
+                                                <a class="btn btn-xs btn-info" href='edit.php?id=<?php echo $item["service_id"] ?>'><i class="fa fa-edit"></i>Sửa</a>
+                                                <a class="btn btn-xs btn-danger" href='delete.php?id=<?php echo $item["service_id"] ?>'><i class="fa fa-times"></i>Xóa</a>
                                             </td>
                                         </tr>
                                     <?php $stt++; endforeach ?>
@@ -79,12 +73,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên sản phẩm</th>
+                                        <th>Tên dịch vụ</th>
                                         <th>Mô tả</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Giá cả</th>
-                                        <th>Website</th>
-                                        <th>Nhóm sản phẩm</th>
+                                        <th>Nhóm dịch vụ</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>

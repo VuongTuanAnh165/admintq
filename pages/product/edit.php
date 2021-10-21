@@ -53,7 +53,6 @@
             else
             {
                 $id_update = $db->update("product",$data,array("product_id"=>$id));
-                echo $update;
                 if($id_update > 0)
                 {
                     $_SESSION['success'] = " Cập nhật thành công ";
@@ -98,6 +97,18 @@
             <div class="row">
                 <div class="col-12">
                     <form class="form-horizontal" action="" method="POST">
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-lable">Website</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="web_id">
+                                    <?php foreach ($website_config as $item) :?>
+                                        <option <?php if($item['web_id']==$product['web_id']) echo 'selected'?> value="<?php echo $item['web_id']?>"><?php echo $item['web_name'] ?></option>
+                                    <? endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Tên sản phẩm</label>
                             <div class="col-sm-8">
@@ -149,17 +160,6 @@
                                 <?php if (isset($error['product_currency'])) :  ?>
                                     <p class="text-danger"></p> <?php echo $error['product_currency'] ?>
                                 <?php endif; ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-lable">Website</label>
-                            <div class="col-sm-8">
-                                <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="web_id">
-                                    <?php foreach ($website_config as $item) :?>
-                                        <option <?php if($item['web_id']==$product['web_id']) echo 'selected'?> value="<?php echo $item['web_id']?>"><?php echo $item['web_name'] ?></option>
-                                    <? endforeach ?>
-                                </select>
                             </div>
                         </div>
 
