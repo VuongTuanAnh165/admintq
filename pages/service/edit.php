@@ -108,9 +108,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Mô tả</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" rows="3" id="summernote" name='service_description'>
-                                    <?php echo $service['service_name']?>
-                                </textarea> 
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="mô tả" name='servservice_descriptionice_name' value="<?php echo $service['service_description']?>">
                                 <?php if (isset($error['service_description'])) :  ?>
                                     <p class="text-danger"></p> <?php echo $error['service_description'] ?>
                                 <?php endif; ?>
@@ -131,9 +129,9 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Nội dung</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" rows="3" id="codeMirrorDemo" class="p-3" name='service_content'>
+                                <textarea class="form-control" rows="3" id="summernote" name='service_content'>
                                     <?php echo $service['service_content'] ?>
-                                </textarea>
+                                </textarea> 
                                 <?php if (isset($error['service_content'])) :  ?>
                                     <p class="text-danger"></p> <?php echo $error['service_content'] ?>
                                 <?php endif; ?>

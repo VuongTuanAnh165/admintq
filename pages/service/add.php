@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Tên dịch vụ</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Tên sản phẩm" name='service_name'>
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Tên dịch vụ" name='service_name'>
                                 <?php if (isset($error['service_name'])) :  ?>
                                     <p class="text-danger"></p> <?php echo $error['service_name'] ?>
                                 <?php endif; ?>
@@ -79,9 +79,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Mô tả</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" rows="3" id="summernote" name='service_description'>
-                                    
-                                </textarea> 
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="mô tả" name='servservice_descriptionice_name'>
                                 <?php if (isset($error['service_description'])) :  ?>
                                     <p class="text-danger"></p> <?php echo $error['service_description'] ?>
                                 <?php endif; ?>
@@ -102,9 +100,9 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Nội dung</label>
                             <div class="col-sm-8">
-                                <textarea class="form-control" rows="3" id="codeMirrorDemo" class="p-3" name='service_content'>
- 
-                                </textarea>
+                                <textarea class="form-control" rows="3" id="summernote" name='service_content'>
+                                    
+                                </textarea> 
                                 <?php if (isset($error['service_content'])) :  ?>
                                     <p class="text-danger"></p> <?php echo $error['service_content'] ?>
                                 <?php endif; ?>
