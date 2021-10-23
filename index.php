@@ -1,4 +1,12 @@
 <?php
+  require_once ( __DIR__ . '/autoload/autoload.php');
+  if(!isset($_SESSION["username"]))  
+ {  
+      header("location:login.php");  
+ }  
+?>
+
+<?php
     require_once ( __DIR__ . '/layout/header.php');
 ?>
 
