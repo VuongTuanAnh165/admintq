@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <label>Nhập lại mật khẩu</label>
       <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="password_confirm">
       <br />
-      <input type="submit" name="login" value="Login" class="btn btn-info" />
+      <input type="submit" name="login" value="Cập nhật" class="btn btn-info" />
       <br />
     </form>
   </div>
