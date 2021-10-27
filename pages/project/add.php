@@ -1,6 +1,8 @@
 <?php
 $open = "project";
 require_once(__DIR__ . '/../../autoload/autoload.php');
+$sql = "SELECT * FROM website_config";
+$website_config = $db->fetchdata($sql);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_name = $_FILES['project_img']['name'];
@@ -19,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "project_img" => $project_img,
             "project_description" => postInput('project_description'),
             "project_status" => postInput('project_status'),
+            "web_id" => postInput('web_id'),
             "project_content" => postInput('project_content')
         ];
     if (postInput('project_name') == '') {
@@ -72,6 +75,16 @@ require_once(__DIR__ . '/../../layout/header.php');
             <div class="row">
                 <div class="col-12">
                     <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-lable">Website</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="web_id">
+                                    <?php foreach ($website_config as $item) : ?>
+                                        <option value="<?php echo $item['web_id'] ?>"><?php echo $item['web_name'] ?></option>
+                                    <? endforeach ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Tên dự án</label>

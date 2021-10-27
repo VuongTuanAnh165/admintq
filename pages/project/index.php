@@ -3,7 +3,7 @@
 ?>
 <?php
     require_once ( __DIR__ . '/../../autoload/autoload.php');
-    $sql="SELECT * FROM project";
+    $sql="SELECT * FROM project,website_config WHERE project.web_id=website_config.web_id";
     $project = $db->fetchdata($sql);
 ?>
 
@@ -51,6 +51,7 @@
                                         <th>Ảnh nền</th>
                                         <th>Mô tả</th>
                                         <th>Kết quả</th>
+                                        <th>Website</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -61,8 +62,9 @@
                                             <td><?php echo $stt ?></td>
                                             <td><?php echo $item['project_name'] ?></td>
                                             <td><?php echo "<img width=100px src='photo/" . $item['project_img'] . "'>" ?></td>
-                                            <td><?php echo $item['project_description'] ?></td>
+                                            <td><?php echo $item['project_description'] ?></td>                                            
                                             <td><?php echo $item['project_status'] ?></td>
+                                            <td><?php echo $item['web_name'] ?></td>
                                             <td>
                                                 <a href="./active.php?id=<?php echo $item['project_id']; ?>" class="btn btn-xs <?php echo $item['project_active'] == 1 ? 'btn-info' : 'btn-dark' ?> ">
                                                     <?php echo $item['project_active'] == 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt' ?>
@@ -82,6 +84,7 @@
                                         <th>Ảnh nền</th>
                                         <th>Mô tả</th>
                                         <th>Kết quả</th>
+                                        <th>Website</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>

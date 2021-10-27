@@ -17,31 +17,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_parts = explode('.', $_FILES['post_image1']['name']);
     $file_ext = strtolower(end($file_parts));
     $expensions = array("jpeg", "jpg", "png");
-    if (in_array($file_ext, $expensions) === false) {
-        $errors[] = "Chỉ hỗ trợ upload file JPEG hoặc PNG.";
+    $post_image1 = $_FILES['post_image1']['name'];
+    $target = "photo/" . basename($post_image1);
+    $data =
+        [
+            "post_title" => postInput('post_title'),
+            "post_description" => postInput('post_description'),
+            "ptd_text" => postInput('ptd_text'),
+            "product_id" => postInput('product_id'),
+            "post_type_id" => postInput('post_type_id'),
+            "web_id" => postInput('web_id'),
+            "post_image1" => $post_image1
+        ];
+
+    if (postInput('post_title') == '') {
+        echo "<script>alert('Mời bạn nhập đầy đủ tên dịch vụ');</script>";
     } else {
-        if ($file_size > 2097152) {
-            $errors[] = 'Kích thước file không được lớn hơn 2MB';
+        if (in_array($file_ext, $expensions) === false) {
+            echo "<script>alert('Chỉ hỗ trợ upload file JPEG hoặc PNG.');</script>";
         } else {
-            $post_image1 = $_FILES['post_image1']['name'];
-            $target = "photo/" . basename($post_image1);
-            $data =
-                [
-                    "post_title" => postInput('post_title'),
-                    "post_description" => postInput('post_description'),
-                    "ptd_text" => postInput('ptd_text'),
-                    "product_id" => postInput('product_id'),
-                    "post_type_id" => postInput('post_type_id'),
-                    "web_id" => postInput('web_id'),
-                    "post_image1" => $post_image1
-                ];
-
-            $error = [];
-            if (postInput('post_title') == '') {
-                $error['post_title'] = "Mời bạn nhập đầy đủ tiêu đề bài viết";
-            }
-
-            if (empty($error)) {
+            if ($file_size > 2097152) {
+                echo "<script>alert('Kích thước file không được lớn hơn 2MB.');</script>";
+            } else {
                 $id_insert = $db->insert("post", $data);
                 if ($id_insert > 0 && move_uploaded_file($_FILES['post_image1']['tmp_name'], $target)) {
                     $_SESSION['success'] = " Thêm mới thành công ";
