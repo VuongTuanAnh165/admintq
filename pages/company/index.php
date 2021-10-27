@@ -52,7 +52,7 @@
                                         <th>Logo</th>
                                         <th>Email</th>
                                         <th>Địa chỉ</th>
-                                        <th>Phone</th>
+                                        <th>Hostline</th>
                                         <th>Mobile</th>
                                         <th>Mô tả</th>
                                         <th>Trạng thái</th>
@@ -88,7 +88,7 @@
                                         <th>Logo</th>
                                         <th>Email</th>
                                         <th>Địa chỉ</th>
-                                        <th>Phone</th>
+                                        <th>Hostline</th>
                                         <th>Mobile</th>
                                         <th>Mô tả</th>
                                         <th>Trạng thái</th>
