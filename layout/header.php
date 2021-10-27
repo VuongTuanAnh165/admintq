@@ -94,7 +94,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-header">Nội dung chính</li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tree"></i>
                                 <p>
@@ -104,19 +104,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url();?>pages/product/index.php" class="nav-link">
+                                    <a href="</*?php echo base_url();?>pages/product/index.php" class="nav-link">
                                         <i class="bi bi-play nav-icon"></i>
                                         <p>Danh sách sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url();?>pages/product_group/index.php" class="nav-link">
+                                    <a href="</*?php echo base_url();?>pages/product_group/index.php" class="nav-link">
                                         <i class="bi bi-play nav-icon"></i>
                                         <p>Nhóm sản phẩm</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
@@ -136,6 +136,23 @@
                                     <a href="<?php echo base_url();?>pages/service_group/index.php" class="nav-link">
                                         <i class="bi bi-play nav-icon"></i>
                                         <p>Nhóm dịch vụ</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i>
+                                <p>
+                                    Dự án
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>pages/project/index.php" class="nav-link">
+                                        <i class="bi bi-play nav-icon"></i>
+                                        <p>Danh sách dự án</p>
                                     </a>
                                 </li>
                             </ul>
