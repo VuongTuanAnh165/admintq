@@ -1,43 +1,52 @@
 <?php
-    $open = "service";
-    require_once(__DIR__ . '/../../autoload/autoload.php');
-    $sql="SELECT * FROM service_group";
-    $service_group=$db->fetchdata($sql);
+$open = "service";
+require_once(__DIR__ . '/../../autoload/autoload.php');
+$sql = "SELECT * FROM service_group";
+$service_group = $db->fetchdata($sql);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $data =
-            [
-                "service_name" => postInput('service_name'),
-                "service_description" => postInput('service_description'),
-                "service_content" => postInput('service_content'),
-                "service_gr_id" => postInput('service_gr_id'),
-                "service_image" => postInput('service_image')
-            ];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $file_name = $_FILES['service_image']['name'];
+    $file_size = $_FILES['service_image']['size'];
+    $file_tmp = $_FILES['service_image']['tmp_name'];
+    $file_type = $_FILES['service_image']['type'];
+    $file_parts = explode('.', $_FILES['service_image']['name']);
+    $file_ext = strtolower(end($file_parts));
+    $expensions = array("jpeg", "jpg", "png");
+    $service_image = $_FILES['service_image']['name'];
+    $target = "photo/" . basename($service_image);
+    $data =
+        [
+            "service_name" => postInput('service_name'),
+            "service_description" => postInput('service_description'),
+            "service_content" => postInput('service_content'),
+            "service_gr_id" => postInput('service_gr_id'),
+            "service_image" => $service_image
+        ];
 
-        $error = [];
-        if (postInput('service_name') == '') 
-        {
-            $error['service_name'] = "Mời bạn nhập đầy đủ tên sản phẩm";
-        }
-
-        if (empty($error)) 
-        {
-            $id_insert = $db->insert("service", $data);
-            if ($id_insert > 0) 
-            {
-                $_SESSION['success'] = " Thêm mới thành công ";
-                redirectAdmin($open);
-            } 
-            else 
-            {
-                $_SESSION['error'] = " Thêm mới thất bại ";
+    if (postInput('service_name') == '') {
+        echo "<script>alert('Mời bạn nhập đầy đủ tên dịch vụ');</script>";
+    } else {
+        if (in_array($file_ext, $expensions) === false) {
+            echo "<script>alert('Chỉ hỗ trợ upload file JPEG hoặc PNG.');</script>";
+        } else {
+            if ($file_size > 2097152) {
+                echo "<script>alert('Kích thước file không được lớn hơn 2MB.');</script>";
+            } else {
+                $id_insert = $db->insert("service", $data);
+                if ($id_insert > 0 && move_uploaded_file($_FILES['service_image']['tmp_name'], $target)) {
+                    $_SESSION['success'] = " Thêm mới thành công ";
+                    redirectAdmin($open);
+                } else {
+                    $_SESSION['error'] = " Thêm mới thất bại ";
+                }
             }
         }
     }
+}
 ?>
 
 <?php
-    require_once ( __DIR__ . '/../../layout/header.php');
+require_once(__DIR__ . '/../../layout/header.php');
 ?>
 
 <div class="content-wrapper">
@@ -64,25 +73,18 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form class="form-horizontal" action="" method="POST">
+                    <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Tên dịch vụ</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Tên dịch vụ" name='service_name'>
-                                <?php if (isset($error['service_name'])) :  ?>
-                                    <p class="text-danger"></p> <?php echo $error['service_name'] ?>
-                                <?php endif; ?>
-
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Tên dịch vụ" name='service_name'>                            
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Mô tả</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="mô tả" name='servservice_descriptionice_name'>
-                                <?php if (isset($error['service_description'])) :  ?>
-                                    <p class="text-danger"></p> <?php echo $error['service_description'] ?>
-                                <?php endif; ?>
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="mô tả" name='service_description'>
                             </div>
                         </div>
 
@@ -90,9 +92,6 @@
                             <label for="exampleFormControlFile1">Hình ảnh</label>
                             <div class="col-sm-8">
                                 <input type="file" class='form-control-file' id="exampleFormControlFile1" name='service_image' onchange="preview_thumbail1(this);">
-                                <?php if (isset($error['service_image'])) :  ?>
-                                    <p class="text-danger"></p> <?php echo $error['service_image'] ?>
-                                <?php endif; ?>
                                 <img id="anh1" src="#" alt="your image">
                             </div>
                         </div>
@@ -101,11 +100,8 @@
                             <label for="inputEmail3" class="col-sm-2 control-lable">Nội dung</label>
                             <div class="col-sm-8">
                                 <textarea class="form-control" rows="3" id="summernote" name='service_content'>
-                                    
-                                </textarea> 
-                                <?php if (isset($error['service_content'])) :  ?>
-                                    <p class="text-danger"></p> <?php echo $error['service_content'] ?>
-                                <?php endif; ?>
+
+                                </textarea>
                             </div>
                         </div>
 
@@ -113,8 +109,8 @@
                             <label for="inputEmail3" class="col-sm-2 control-lable">Nhóm dịch vụ</label>
                             <div class="col-sm-8">
                                 <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="service_gr_id">
-                                    <?php foreach ($service_group as $item) :?>
-                                        <option value="<?php echo $item['service_gr_id']?>"><?php echo $item['service_gr_name'] ?></option>
+                                    <?php foreach ($service_group as $item) : ?>
+                                        <option value="<?php echo $item['service_gr_id'] ?>"><?php echo $item['service_gr_name'] ?></option>
                                     <? endforeach ?>
                                 </select>
                             </div>
@@ -137,5 +133,5 @@
 </div>
 
 <?php
-    require_once ( __DIR__ . '/../../layout/footer.php');
+require_once(__DIR__ . '/../../layout/footer.php');
 ?>
