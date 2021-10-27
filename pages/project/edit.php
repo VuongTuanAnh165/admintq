@@ -10,6 +10,9 @@ if (empty($project)) {
     redirectAdmin($open);
 }
 
+$sql1 = "SELECT * FROM website_config";
+$website_config = $db->fetchdata($sql1);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors_img = "";
     $file_name = $_FILES['project_img']['name'];
@@ -28,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "project_img" => $project_img,
             "project_description" => postInput('project_description'),
             "project_status" => postInput('project_status'),
+            "web_id" => postInput('web_id'),
             "project_content" => postInput('project_content')
         ];
     if (postInput('project_name') == '') {
@@ -74,12 +78,12 @@ require_once(__DIR__ . '/../../layout/header.php');
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thay đổi website</h1>
+                    <h1>Thay đổi Dự án</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="../../index.php">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="./index.php">Danh sách website</a></li>
+                        <li class="breadcrumb-item"><a href="./index.php">Danh sách Dự án</a></li>
                         <li class="breadcrumb-item active">Sửa</li>
                     </ol>
                 </div>
@@ -93,6 +97,17 @@ require_once(__DIR__ . '/../../layout/header.php');
             <div class="row">
                 <div class="col-12">
                     <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-lable">Website</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="web_id">
+                                    <?php foreach ($website_config as $item) : ?>
+                                        <option <?php if ($item['web_id'] == $project['web_id']) echo 'selected' ?> value="<?php echo $item['web_id'] ?>"><?php echo $item['web_name'] ?></option>
+                                    <? endforeach ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Tên dự án</label>

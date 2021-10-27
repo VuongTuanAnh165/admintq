@@ -74,10 +74,22 @@ require_once(__DIR__ . '/../../layout/header.php');
             <div class="row">
                 <div class="col-12">
                     <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-lable">Nhóm dịch vụ</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="service_gr_id">
+                                    <?php foreach ($service_group as $item) : ?>
+                                        <option value="<?php echo $item['service_gr_id'] ?>"><?php echo $item['service_gr_name'] ?></option>
+                                    <? endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-lable">Tên dịch vụ</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Tên dịch vụ" name='service_name'>                            
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Tên dịch vụ" name='service_name'>
                             </div>
                         </div>
 
@@ -102,17 +114,6 @@ require_once(__DIR__ . '/../../layout/header.php');
                                 <textarea class="form-control" rows="3" id="summernote" name='service_content'>
 
                                 </textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-lable">Nhóm dịch vụ</label>
-                            <div class="col-sm-8">
-                                <select class="form-control form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="service_gr_id">
-                                    <?php foreach ($service_group as $item) : ?>
-                                        <option value="<?php echo $item['service_gr_id'] ?>"><?php echo $item['service_gr_name'] ?></option>
-                                    <? endforeach ?>
-                                </select>
                             </div>
                         </div>
 

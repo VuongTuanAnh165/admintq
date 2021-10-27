@@ -18,7 +18,6 @@ $post_type = $db->fetchdata($sql2);
 $product = $db->fetchdata($sql3);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $errors = array();
     $file_name = $_FILES['post_image1']['name'];
     $file_size = $_FILES['post_image1']['size'];
     $file_tmp = $_FILES['post_image1']['tmp_name'];
@@ -26,12 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_parts = explode('.', $_FILES['post_image1']['name']);
     $file_ext = strtolower(end($file_parts));
     $expensions = array("jpeg", "jpg", "png");
-    if (in_array($file_ext, $expensions) === false) {
-        $errors[] = "Chỉ hỗ trợ upload file JPEG hoặc PNG.";
-    }
-    if ($file_size > 2097152) {
-        $errors[] = 'Kích thước file không được lớn hơn 2MB';
-    }
     $post_image1 = $_FILES['post_image1']['name'];
     $target = "photo/" . basename($post_image1);
     $data =
@@ -45,29 +38,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "post_image1" => $post_image1
         ];
 
-    $error = [];
     if (postInput('post_title') == '') {
-        $error['post_title'] = "Mời bạn nhập đầy đủ tên sản phẩm";
-    }
-
-    if (empty($error)) {
-        if ($post['post_title'] != $data['post_title']) {
-            $id_update = $db->update("post", $data, array("post_id" => $id));
-            if ($id_update > 0 && move_uploaded_file($_FILES['post_image1']['tmp_name'], $target)) {
-                $_SESSION['success'] = " Cập nhật thành công ";
-                redirectAdmin($open);
-            } else {
-                $_SESSION['error'] = " Dữ liệu không thay đổi ";
-                redirectAdmin($open);
-            }
+        echo "<script>alert('Mời bạn nhập đầy đủ tên dịch vụ');</script>";
+    } else {
+        if (in_array($file_ext, $expensions) === false) {
+            echo "<script>alert('Chỉ hỗ trợ upload file JPEG hoặc PNG.');</script>";
         } else {
-            $id_update = $db->update("post", $data, array("post_id" => $id));
-            if ($id_update > 0 && move_uploaded_file($_FILES['post_image1']['tmp_name'], $target)) {
-                $_SESSION['success'] = " Cập nhật thành công ";
-                redirectAdmin($open);
+            if ($file_size > 2097152) {
+                echo "<script>alert('Kích thước file không được lớn hơn 2MB.');</script>";
             } else {
-                $_SESSION['error'] = " Dữ liệu không thay đổi ";
-                redirectAdmin($open);
+                if ($post['post_title'] != $data['post_title']) {
+                    $id_update = $db->update("post", $data, array("post_id" => $id));
+                    if ($id_update > 0 && move_uploaded_file($_FILES['post_image1']['tmp_name'], $target)) {
+                        $_SESSION['success'] = " Cập nhật thành công ";
+                        redirectAdmin($open);
+                    } else {
+                        $_SESSION['error'] = " Dữ liệu không thay đổi ";
+                        redirectAdmin($open);
+                    }
+                } else {
+                    $id_update = $db->update("post", $data, array("post_id" => $id));
+                    if ($id_update > 0 && move_uploaded_file($_FILES['post_image1']['tmp_name'], $target)) {
+                        $_SESSION['success'] = " Cập nhật thành công ";
+                        redirectAdmin($open);
+                    } else {
+                        $_SESSION['error'] = " Dữ liệu không thay đổi ";
+                        redirectAdmin($open);
+                    }
+                }
             }
         }
     }

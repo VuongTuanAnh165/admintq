@@ -1,11 +1,10 @@
 <?php
     require_once ( __DIR__ . '/../../layout/header.php');
 ?>
-
 <?php
     require_once ( __DIR__ . '/../../autoload/autoload.php');
-    $sql="SELECT *  FROM company";
-    $company = $db->fetchdata($sql);
+    $sql="SELECT * FROM garden,website_config WHERE garden.web_id=website_config.web_id";
+    $garden = $db->fetchdata($sql);
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -15,12 +14,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Công ty</h1>
+                    <h1>Vường đẹp An Nhiên <a href="./add.php" class="btn btn-success">Thêm mới</a></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="../../index.php">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Thông tin công ty</li>
+                        <li class="breadcrumb-item active">Vường đẹp An Nhiên</li>
                     </ol>
                 </div>
             </div>
@@ -40,7 +39,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Bảng thông tin công ty</h3>
+                            <h3 class="card-title">Bảng danh sách blog</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -48,35 +47,26 @@
                                 <thead> 
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên công ty</th>
-                                        <th>Logo</th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Phone</th>
-                                        <th>Mobile</th>
                                         <th>Mô tả</th>
+                                        <th>Website</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $stt = 1; foreach ($company as $item) : ?>
+                                    <?php $stt = 1; foreach ($garden as $item) : ?>
                                         <tr>
                                             <td><?php echo $stt ?></td>
-                                            <td><?php echo $item['company_name'] ?></td>
-                                            <td><?php echo "<img width=100px src='photo/" . $item['company_logo'] . "'>" ?></td>
-                                            <td><?php echo $item['company_email'] ?></td>
-                                            <td><?php echo $item['company_address'] ?></td>
-                                            <td><?php echo $item['company_phone'] ?></td>
-                                            <td><?php echo $item['company_mobile'] ?></td>
-                                            <td><?php echo $item['company_description'] ?></td>
+                                            <td><?php echo $item['garden_description'] ?></td>                                          
+                                            <td><?php echo $item['web_name'] ?></td>
                                             <td>
-                                                <a href="active.php?id=<?php echo $item['company_id'] ?>" class="btn btn-xs <?php echo $item['company_active'] == 1 ? 'btn-info' : 'btn-dark' ?> ">
-                                                    <?php echo $item['company_active'] == 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt' ?>
+                                                <a href="active.php?id=<?php echo $item['garden_id']; ?>" class="btn btn-xs <?php echo $item['garden_active'] == 1 ? 'btn-info' : 'btn-dark' ?> ">
+                                                    <?php echo $item['garden_active'] == 1 ? 'Đã kích hoạt' : 'Chưa kích hoạt' ?>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-xs btn-info" href='edit.php?id=<?php echo $item["company_id"] ?>'><i class="fa fa-edit"></i>Sửa</a>
+                                                <a class="btn btn-xs btn-info" href='edit.php?id=<?php echo $item["garden_id"] ?>'><i class="fa fa-edit"></i>Sửa</a>
+                                                <a class="btn btn-xs btn-danger" href='delete.php?id=<?php echo $item["garden_id"] ?>'><i class="fa fa-times"></i>Xóa</a>
                                             </td>
                                         </tr>
                                     <?php $stt++; endforeach ?>
@@ -84,13 +74,8 @@
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên công ty</th>
-                                        <th>Logo</th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Phone</th>
-                                        <th>Mobile</th>
                                         <th>Mô tả</th>
+                                        <th>Website</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>

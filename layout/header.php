@@ -1,5 +1,7 @@
 <?php
     require_once ( __DIR__ . '/../autoload/autoload.php');
+    $sql="SELECT *  FROM company";
+    $company = $db->fetchdata($sql);
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +71,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="<?php echo base_url();?>index.php" class="brand-link">
-                <img src="<?php echo base_url();?>image/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="<?php echo base_url();?>pages/company/photo/<?php echo $company[0]['company_logo'] ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">MULTIPLE MANAGER</span>
             </a>
 
@@ -142,7 +144,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="nav-icon bi bi-kanban"></i>
                                 <p>
                                     Dự án
                                     <i class="fas fa-angle-left right"></i>
@@ -157,7 +159,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-header">Thông tin website</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
@@ -181,6 +182,43 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-header">Blog</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-columns-gap"></i>
+                                <p>
+                                    Vườn đẹp An nhiên
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>pages/garden/index.php" class="nav-link">
+                                        <i class="bi bi-play nav-icon"></i>
+                                        <p>Quản lý Blog </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-header">Thông tin Khách hàng</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-person"></i>
+                                <p>
+                                    Khách hàng
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url();?>pages/user_tb/index.php" class="nav-link">
+                                        <i class="bi bi-play nav-icon"></i>
+                                        <p>Quản lý khách hàng</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-header">Cài đặt</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-plus-square"></i>
@@ -198,7 +236,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-header">Cài đặt</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon bi bi-gear"></i>

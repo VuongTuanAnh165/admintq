@@ -21453,7 +21453,7 @@ body.text-sm .control-sidebar {
 }
 
 .img-circle {
-  border-radius: 50%;
+  border-radius: 0%;
 }
 
 .img-size-64,
