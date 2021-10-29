@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $expensions = array("jpeg", "jpg", "png");
 
     $company_logo = $_FILES['company_logo']['name'];
-    $target = "photo/" . basename($company_logo);
+    $target = base_img($open) ."photo/" . basename($company_logo);
     $data =
         [
             "company_name" => postInput('company_name'),

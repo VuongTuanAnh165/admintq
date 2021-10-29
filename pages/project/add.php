@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $expensions = array("jpeg", "jpg", "png");
 
     $project_img = $_FILES['project_img']['name'];
-    $target = "photo/" . basename($project_img);
+    $target =base_img($open) . "photo/" . basename($project_img);
     $data =
         [
             "project_name" => postInput('project_name'),

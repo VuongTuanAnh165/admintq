@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_ext = strtolower(end($file_parts));
     $expensions = array("jpeg", "jpg", "png");
     $post_image1 = $_FILES['post_image1']['name'];
-    $target = "photo/" . basename($post_image1);
+    $target =base_img($open) . "photo/" . basename($post_image1);
     $data =
         [
             "post_title" => postInput('post_title'),

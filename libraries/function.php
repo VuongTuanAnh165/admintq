@@ -39,6 +39,10 @@
     {
         return $url = "http://adminas.com/";
     }
+    function base_img($link)
+    {
+        return $url = "C://xampp/htdocs/pages/".$link."/";
+    }
     /*function base_url()
     {
         return $url = "http://laptopvta.xyz/";
