@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_ext = strtolower(end($file_parts));
     $expensions = array("jpeg", "jpg", "png");
     $service_image = $_FILES['service_image']['name'];
-    $target = "photo/" . basename($service_image);
+    $target = base_img($open) ."photo/" . basename($service_image);
     $data =
         [
             "service_name" => postInput('service_name'),

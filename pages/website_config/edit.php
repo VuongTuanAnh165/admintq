@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_ext = strtolower(end($file_parts));
     $expensions = array("jpeg", "jpg", "png");
     $web_icon = $_FILES['web_icon']['name'];
-    $target = "photo/" . basename($web_icon);
+    $target = base_img($open) ."photo/" . basename($web_icon);
     $data =
         [
             "web_name" => postInput('web_name'),

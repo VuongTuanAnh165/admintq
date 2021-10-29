@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $expensions = array("jpeg", "jpg", "png");
 
     $post_type_img = $_FILES['post_type_img']['name'];
-    $target = "photo/" . basename($post_type_img);
+    $target = base_img($open) ."photo/" . basename($post_type_img);
     $data =
         [
             "post_type_title" => postInput('post_type_title'),
